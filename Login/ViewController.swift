@@ -18,7 +18,7 @@ class ViewController: UIViewController{
         // Do any additional setup after loading the view.
         
         self.usrnameTxt.text = "jeslo"
-        self.passwordTxt.text = "mathew"
+        self.passwordTxt.text = "MAthew9947"
         
     }
     
@@ -28,7 +28,24 @@ class ViewController: UIViewController{
         //details.set(usrnameTxt.text,forKey: "usrname")
         //details.set(passwordTxt.text, forKey: "password")
         
-        if usrnameTxt.text=="jeslo" && passwordTxt.text=="mathew" {
+        func passwordValidation(testStr:String?) -> Bool
+        {
+            guard testStr != nil else { return false }
+            let passwordTest = NSPredicate(format: "SELF MATCHES %@", "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}")
+            return passwordTest.evaluate(with: testStr)
+        }
+        func usernameValidation(username:String?) -> Bool {
+            
+            guard username != nil else { return false }
+            let regEx = "[a-z]"
+            let usernameTest = NSPredicate(format:"SELF MATCHES %@", regEx)
+            return usernameTest.evaluate(with: username)
+        }
+        
+        
+        if usrnameTxt.text=="jeslo" && passwordTxt.text=="MAthew9947" && passwordValidation(testStr: passwordTxt.text) && usernameValidation(username: usrnameTxt.text)
+        {
+            
             let profileViewController=storyboard?.instantiateViewController(withIdentifier: "profile")as! ProfileController
             self.navigationController?.pushViewController(profileViewController,animated: true)
             profileViewController.name="jeslo"
