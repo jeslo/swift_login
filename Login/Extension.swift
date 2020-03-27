@@ -1,30 +1,27 @@
-//
-//  Extension.swift
-//  Login
-//
-//  Created by Joe on 26/03/20.
-//  Copyright © 2020 jess. All rights reserved.
-//
-
-import UIKit
-
-class Extension: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+import  Foundation
+extension String{
+    enum ValidityType{
+        case username
+        case password
+    }
+    enum Regex: String{
+        case username="[a-z]{4,10}"
+        case password="[0-9]{5,10}"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func  isValid(_ validityType: ValidityType) -> Bool {
+        let fromat="SELF MATCH %@"
+        let regex=""
+        switch validityType {
+        case .username:
+            break
+        case .password:
+            break
+        }
+        guard let regex = try? NSRegularExpression(pattern: rhs) else { return false }
+        let range = NSRange(location: 0, length: lhs.utf16.count)
+        return regex.firstMatch(in: lhs, options: [], range: range) != nil
+        
+        return true
     }
-    */
-
 }

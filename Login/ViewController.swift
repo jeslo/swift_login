@@ -7,11 +7,19 @@
 //
 
 import UIKit
+func ~= (lhs: String, rhs: String) -> Bool {
+        guard let regex = try? NSRegularExpression(pattern: rhs) else { return false }
+        let range = NSRange(location: 0, length: lhs.utf16.count)
+        return regex.firstMatch(in: lhs, options: [], range: range) != nil
+    }
+
 class ViewController: UIViewController{
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var passwordTxt:UITextField!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var usrnameTxt: UITextField!
+    let tf=UITextField()
+    tf.borderStyle = .roundedRect
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,22 +36,11 @@ class ViewController: UIViewController{
         //details.set(usrnameTxt.text,forKey: "usrname")
         //details.set(passwordTxt.text, forKey: "password")
         
-        func passwordValidation(testStr:String?) -> Bool
+        func credentiialCheck()
         {
-            guard testStr != nil else { return false }
-            let passwordTest = NSPredicate(format: "SELF MATCHES %@", "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}")
-            return passwordTest.evaluate(with: testStr)
-        }
-        func usernameValidation(username:String?) -> Bool {
             
-            guard username != nil else { return false }
-            let regEx = "[a-z]"
-            let usernameTest = NSPredicate(format:"SELF MATCHES %@", regEx)
-            return usernameTest.evaluate(with: username)
         }
-        
-        
-        if usrnameTxt.text=="jeslo" && passwordTxt.text=="MAthew9947" && passwordValidation(testStr: passwordTxt.text) && usernameValidation(username: usrnameTxt.text)
+        if usrnameTxt.text=="jeslo" && passwordTxt.text=="MAthew9947"
         {
             
             let profileViewController=storyboard?.instantiateViewController(withIdentifier: "profile")as! ProfileController
