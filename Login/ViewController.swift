@@ -7,42 +7,51 @@
 //
 
 import UIKit
-class ViewController: UIViewController{
+
+func validate (lhs: String, type: String) -> Bool {
+    let pattern = type == "userId" ? "[a-z,A_Z]" : "[0-9]{5,10}"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
+        let range = NSRange(location: 0, length: lhs.count)
+        return regex.firstMatch(in: lhs, options: [], range: range) != nil
+    }
+
+class ViewController: UIViewController, UITextFieldDelegate
+{
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var passwordTxt:UITextField!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var usrnameTxt: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        self.usrnameTxt.text = "jeslo"
-        self.passwordTxt.text = "mathew"
-        
+        passwordTxt.delegate=self
+        usrnameTxt.delegate=self
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        changeColor(field: textField, valid: true)
     }
     
+    func changeColor (field:UITextField, valid: Bool) {
+        let color = valid == true ? UIColor.black.cgColor : UIColor.red.cgColor
+        field.layer.borderWidth = 1
+        field.layer.borderColor = color
+    }
+
     @IBAction func loginAction(_ sender: Any) {
         
-        //let details=UserDefaults.standard
-        //details.set(usrnameTxt.text,forKey: "usrname")
-        //details.set(passwordTxt.text, forKey: "password")
+        if(validate(lhs: usrnameTxt.text ?? "", type: "userId")){
+            self.changeColor(field: usrnameTxt, valid: true)
+        } else {
+         self.changeColor(field: usrnameTxt, valid: false)
+        }
         
-        if usrnameTxt.text=="jeslo" && passwordTxt.text=="mathew" {
-            let profileViewController=storyboard?.instantiateViewController(withIdentifier: "profile")as! ProfileController
-            self.navigationController?.pushViewController(profileViewController,animated: true)
-            profileViewController.name="jeslo"
+        if(validate(lhs: passwordTxt.text ?? "", type: "password")){
+            self.changeColor(field: passwordTxt, valid: true)
+        } else{
+            self.changeColor(field: passwordTxt, valid: false)
         }
-        else
-        {
-            let alert = UIAlertController(title: "Login Failed", message: "Please enter valid username and password", preferredStyle: UIAlertController.Style.alert)
-            
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            
-            // show the alert
-            self.present(alert, animated: true, completion: nil)
-        }
+        
     }
     
     @IBAction func signUPAction(_ sender: Any) {

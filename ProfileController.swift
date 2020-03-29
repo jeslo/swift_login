@@ -28,16 +28,12 @@ class ProfileController: UIViewController {
     
     func removeViewcontroller()
     {
-       self.navigationController?.viewControllers.remove(at: 0)
+        self.navigationController?.viewControllers.remove(at: 0)
     }
     
     @IBAction func logoutAction(_ sender: Any) {
-        //var logoutArray=navigationTempArray
-        //self.navigationController?.viewControllers=logoutArray
-        
         let loginViewController=storyboard?.instantiateViewController(withIdentifier: "login")as! ViewController
         self.navigationController?.viewControllers=[loginViewController]
-        //self.navigationController?.pushViewController(loginViewController,animated: true)
         
     }
 }
