@@ -14,7 +14,6 @@
 		D89007AE2423ECBE00F252A8 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89007AD2423ECBE00F252A8 /* ProfileController.swift */; };
 		D89007B02424A80900F252A8 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89007AF2424A80900F252A8 /* SignUpController.swift */; };
 		D89007B324288DFF00F252A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89007B124288DFE00F252A8 /* Main.storyboard */; };
-		D89007B5242CD7F800F252A8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89007B4242CD7F800F252A8 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		D89007AD2423ECBE00F252A8 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = SOURCE_ROOT; };
 		D89007AF2424A80900F252A8 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		D89007B224288DFE00F252A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D89007B4242CD7F800F252A8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +60,6 @@
 			children = (
 				D890079B2423E90D00F252A8 /* AppDelegate.swift */,
 				D890079D2423E90D00F252A8 /* ViewController.swift */,
-				D89007B4242CD7F800F252A8 /* Extension.swift */,
 				D89007B124288DFE00F252A8 /* Main.storyboard */,
 				D89007AF2424A80900F252A8 /* SignUpController.swift */,
 				D89007AD2423ECBE00F252A8 /* ProfileController.swift */,
@@ -144,7 +141,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D89007B5242CD7F800F252A8 /* Extension.swift in Sources */,
 				D890079E2423E90D00F252A8 /* ViewController.swift in Sources */,
 				D890079C2423E90D00F252A8 /* AppDelegate.swift in Sources */,
 				D89007AE2423ECBE00F252A8 /* ProfileController.swift in Sources */,

@@ -105,9 +105,6 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits"/>
-                                                        <connections>
-                                                            <action selector="textChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="re7-SM-Dtq"/>
-                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>

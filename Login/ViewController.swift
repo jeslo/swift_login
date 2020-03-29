@@ -8,91 +8,50 @@
 
 import UIKit
 
-func validate (lhs: String, rhs: String) -> Bool {
-        guard let regex = try? NSRegularExpression(pattern: rhs) else { return false }
-        let range = NSRange(location: 0, length: lhs.utf16.count)
+func validate (lhs: String, type: String) -> Bool {
+    let pattern = type == "userId" ? "[a-z,A_Z]" : "[0-9]{5,10}"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
+        let range = NSRange(location: 0, length: lhs.count)
         return regex.firstMatch(in: lhs, options: [], range: range) != nil
     }
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, UITextFieldDelegate
+{
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var passwordTxt:UITextField!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var usrnameTxt: UITextField!
     
-    let validitytype: String.ValidityType = .username
-    var usrnamepattern :String="[a-z]{3,8}"
-    var passwordpattern :String="[0-9]{5,10}"
-    let colornotok = UIColor.red
-    let colorok = UIColor.white
-    
-    var textField: UITextField {
-        let tf = UITextField()
-        tf.addTarget(self, action: #selector(validating), for: .editingChanged)
-        return tf
-    
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        
-        //Validornot()
-        
+        passwordTxt.delegate=self
+        usrnameTxt.delegate=self
     }
-    @objc fileprivate func validating()
-    {
-        if textField.restorationIdentifier == "usrname"
-        {
-            
-            if validate(lhs: validitytype, rhs: usrnamepattern)
-            {
-                
-                usrnameTxt.layer.borderColor = colorok.cgColor
-            }
-            else{
-                usrnameTxt.layer.borderColor = colornotok.cgColor
-            }
-        }
-            
-        else if textField.restorationIdentifier == "passwrd"
-        {
-            if validate(lhs: passwordTxt.text!, rhs: passwordpattern)
-            {
-                passwordTxt.layer.borderColor = colorok.cgColor
-            }
-            else{
-                passwordTxt.layer.borderColor = colornotok.cgColor
-            }
-        }
-        else{
-            print("kunna")
-        }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        changeColor(field: textField, valid: true)
     }
+    
+    func changeColor (field:UITextField, valid: Bool) {
+        let color = valid == true ? UIColor.black.cgColor : UIColor.red.cgColor
+        field.layer.borderWidth = 1
+        field.layer.borderColor = color
+    }
+
     @IBAction func loginAction(_ sender: Any) {
         
-        //let details=UserDefaults.standard
-        //details.set(usrnameTxt.text,forKey: "usrname")
-        //details.set(passwordTxt.text, forKey: "password")
-        if usrnameTxt.text=="jeslo" && passwordTxt.text=="994718"
-        {
-            
-            let profileViewController=storyboard?.instantiateViewController(withIdentifier: "profile")as! ProfileController
-            self.navigationController?.pushViewController(profileViewController,animated: true)
-            profileViewController.name="jeslo"
+        if(validate(lhs: usrnameTxt.text ?? "", type: "userId")){
+            self.changeColor(field: usrnameTxt, valid: true)
+        } else {
+         self.changeColor(field: usrnameTxt, valid: false)
         }
-        else
-        {
-            let alert = UIAlertController(title: "Login Failed", message: "Please enter valid username and password", preferredStyle: UIAlertController.Style.alert)
-            
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            
-            // show the alert
-            self.present(alert, animated: true, completion: nil)
+        
+        if(validate(lhs: passwordTxt.text ?? "", type: "password")){
+            self.changeColor(field: passwordTxt, valid: true)
+        } else{
+            self.changeColor(field: passwordTxt, valid: false)
         }
+        
     }
     
     @IBAction func signUPAction(_ sender: Any) {
